@@ -9,14 +9,22 @@ import {
   Textarea,
   useClipboard
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSigner } from '../hooks/useSigner';
+import { useRouter } from "next/router";
 
-export default function Home() {
+export default function Message() {
+  const query = useRouter();
   const { signer } = useSigner();
   const [message, setMessage] = useState("");
   const [signature, setSignature] = useState("");
   const { hasCopied, onCopy } = useClipboard(signature);
+
+  useEffect(() => {
+    if(query){
+      setMessage(query.query.message)
+    }
+  }, [query])
 
   const handleSetMessage = e => setMessage(e.target.value);
   
@@ -24,7 +32,6 @@ export default function Home() {
     const sig = await signer.signMessage(message);
     setSignature(sig);
   }
-
   return (
     <Flex align={'center'} justify={'center'}>
       <Stack spacing={8} mx={'auto'} w={'lg'} py={12} px={6}>
@@ -35,7 +42,7 @@ export default function Home() {
           <Stack spacing={10}>
             <FormControl id="message">
               <FormLabel>Message</FormLabel>
-              <Textarea onChange={handleSetMessage} placeholder='Type anything to sign' />
+              <Textarea onChange={handleSetMessage} value={message} onChange={handleSetMessage} placeholder='Type anything to sign' />
             </FormControl>
             <FormControl id="signature">
               <FormLabel>Signature</FormLabel>
