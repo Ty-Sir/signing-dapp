@@ -32,7 +32,7 @@ export default function Home() {
 
   return (
     <Flex align={'center'} justify={'center'}>
-      <Stack spacing={8} mx={'auto'} w={'lg'} py={12} px={6}>
+      <Stack spacing={8} mx={'auto'} w={'2xl'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'}>Sign Message</Heading>
         </Stack>
@@ -40,7 +40,7 @@ export default function Home() {
           <Stack spacing={10}>
             <FormControl id="message">
               <FormLabel>Message</FormLabel>
-              <Textarea onChange={handleSetMessage} placeholder='Type anything to sign' />
+              <Textarea h='8rem' onChange={handleSetMessage} placeholder='Type anything to sign' />
             </FormControl>
             <FormControl id="signature">
               <FormLabel>Signature</FormLabel>
