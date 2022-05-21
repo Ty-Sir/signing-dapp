@@ -42,7 +42,7 @@ export default function Message() {
           <Stack spacing={10}>
             <FormControl id="message">
               <FormLabel>Message</FormLabel>
-              <Textarea onChange={handleSetMessage} value={message} onChange={handleSetMessage} placeholder='Type anything to sign' />
+              <Textarea onChange={handleSetMessage} value={message} placeholder='Type anything to sign' />
             </FormControl>
             <FormControl id="signature">
               <FormLabel>Signature</FormLabel>
