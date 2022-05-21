@@ -7,10 +7,11 @@ import {
   Button,
   Heading,
   Textarea,
-  useClipboard
+  useClipboard,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useSigner } from '../hooks/useSigner';
+import { infoToast } from './_app';
 
 export default function Home() {
   const { signer } = useSigner();
@@ -21,6 +22,10 @@ export default function Home() {
   const handleSetMessage = e => setMessage(e.target.value);
   
   const signMessage = async () => {
+    if(!signer){
+      infoToast("No Wallet Found", "Please connect wallet to sign messages.")
+      return;
+    }
     const sig = await signer.signMessage(message);
     setSignature(sig);
   }

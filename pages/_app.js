@@ -3,6 +3,8 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { Box, Flex } from '@chakra-ui/react';
 import { Connect } from "../components/Connect/Connect";
 import { Footer } from "../components/Footer/Footer";
+import { createStandaloneToast } from '@chakra-ui/toast';
+const { ToastContainer, toast } = createStandaloneToast();
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -16,8 +18,20 @@ function MyApp({ Component, pageProps }) {
         </Box>
         <Footer />
       </Box>
+      <ToastContainer />
     </ChakraProvider>
   )
 }
 
 export default MyApp
+
+export const infoToast = (title, message) => {
+  toast({
+    title: title,
+    description: message,
+    status: 'info',
+    duration: 2500,
+    isClosable: true,
+    position: 'top-left'
+  })
+}

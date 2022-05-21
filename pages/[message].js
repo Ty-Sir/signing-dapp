@@ -12,6 +12,7 @@ import {
 import { useState, useEffect } from 'react';
 import { useSigner } from '../hooks/useSigner';
 import { useRouter } from "next/router";
+import { infoToast } from './_app';
 
 export default function Message() {
   const query = useRouter();
@@ -29,6 +30,10 @@ export default function Message() {
   const handleSetMessage = e => setMessage(e.target.value);
   
   const signMessage = async () => {
+    if(!signer){
+      infoToast("No Wallet Found", "Please connect wallet to sign messages.")
+      return;
+    }
     const sig = await signer.signMessage(message);
     setSignature(sig);
   }
